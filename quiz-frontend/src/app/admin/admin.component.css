@@ -1,0 +1,135 @@
+:host {
+  display: block;
+  height: 100vh;
+}
+
+.page {
+  height: 100vh;
+  background: radial-gradient(circle at top, #141e30, #243b55);
+}
+
+.top-nav {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  z-index: 10;
+}
+
+.menu-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: none;
+  background: rgba(255,255,255,0.18);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  backdrop-filter: blur(15px);
+}
+
+.menu {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0,0,0,0.55);
+  padding: 12px;
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+}
+
+.menu button {
+  min-width: 130px;
+  padding: 12px;
+  margin: 5px 0;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  cursor: pointer;
+}
+
+.menu button:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.center {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 680px;
+  padding: 52px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(25px);
+  color: white;
+  text-align: center;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
+}
+
+.card h1 {
+  font-size: 34px;
+  margin-bottom: 35px;
+}
+
+.question-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.answer-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 16px 0;
+}
+
+.answer-input {
+  flex: 1;
+  padding: 15px;
+  border-radius: 14px;
+  border: none;
+  font-size: 15px;
+}
+
+.right-part {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  min-width: 125px;
+  justify-content: flex-end;
+  font-weight: bold;
+}
+
+.right-part input {
+  transform: scale(1.25);
+}
+
+.main-btn,
+.secondary-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 15px;
+  border-radius: 16px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.main-btn {
+  background: linear-gradient(45deg, #ff7a18, #ffb347);
+}
+
+.secondary-btn {
+  background: rgba(255,255,255,0.16);
+}

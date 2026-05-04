@@ -1,0 +1,69 @@
+<div class="page">
+
+  <div class="top-nav">
+    <button class="menu-btn" (click)="toggleMenu()">☰</button>
+
+    <div class="menu" *ngIf="menuOpen">
+      <button routerLink="/">Quiz</button>
+      <button routerLink="/admin">Admin</button>
+      <button (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="center">
+
+    <div class="list-card">
+
+      <h1>All Questions</h1>
+
+      <div class="questions-list">
+
+        <div class="q-card" *ngFor="let q of questions">
+
+          <!-- VIEW MODE -->
+          <div *ngIf="!editingQuestion || editingQuestion.id !== q.id">
+
+            <h3>{{ q.questionText }}</h3>
+
+            <div class="answers">
+              <div *ngFor="let a of q.answers">
+                {{ a.answerText }} <span *ngIf="a.isCorrect">✓</span>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button (click)="startEdit(q)">Edit</button>
+              <button class="delete" (click)="deleteQuestion(q.id)">Delete</button>
+            </div>
+
+          </div>
+
+          <!-- EDIT MODE -->
+          <div *ngIf="editingQuestion && editingQuestion.id === q.id">
+
+            <input [(ngModel)]="editingQuestion.questionText">
+
+            <div *ngFor="let a of editingQuestion.answers" class="edit-row">
+              <input [(ngModel)]="a.answerText">
+              <label>
+                Correct
+                <input type="checkbox" [(ngModel)]="a.isCorrect">
+              </label>
+            </div>
+
+            <div class="actions">
+              <button (click)="saveEdit()">Save</button>
+              <button (click)="cancelEdit()">Cancel</button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

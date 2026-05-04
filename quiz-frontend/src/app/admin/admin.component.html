@@ -1,0 +1,40 @@
+<div class="page">
+
+  <div class="top-nav">
+    <button class="menu-btn" (click)="toggleMenu()">☰</button>
+
+    <div class="menu" *ngIf="menuOpen">
+      <button routerLink="/">Quiz</button>
+      <button routerLink="/admin">Admin</button>
+      <button (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="center">
+
+    <div class="card">
+
+      <h1>Add Question</h1>
+
+      <input class="question-input" placeholder="Question" [(ngModel)]="newQuestion.questionText">
+
+      <div *ngFor="let a of newQuestion.answers" class="answer-row">
+
+        <input class="answer-input" placeholder="Answer" [(ngModel)]="a.answerText">
+
+        <div class="right-part">
+          <span>Correct</span>
+          <input type="checkbox" [(ngModel)]="a.isCorrect">
+        </div>
+
+      </div>
+
+      <button class="main-btn" (click)="addQuestion()">Add Question</button>
+
+      <button class="secondary-btn" routerLink="/questions">View All Questions</button>
+
+    </div>
+
+  </div>
+
+</div>

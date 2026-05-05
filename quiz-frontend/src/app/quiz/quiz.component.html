@@ -12,11 +12,92 @@
 
   <div class="center">
 
-    <div class="card" *ngIf="!finished && question">
+    <div class="card setup-card" *ngIf="!quizStarted && !finished">
+
+      <div class="badge">Banking Interview Prep</div>
+
+      <h1>Choose Your Quiz</h1>
+
+      <p class="subtitle">
+        Practice banking, security and technical interview questions.
+      </p>
+
+      <div class="section">
+        <h3>Difficulty</h3>
+
+        <div class="difficulty-grid">
+          <button
+            [class.selected]="selectedDifficulty === 'ALL'"
+            (click)="changeDifficulty('ALL')"
+          >
+            All
+            <span>{{ getDifficultyCount('ALL') }} questions</span>
+          </button>
+
+          <button
+            [class.selected]="selectedDifficulty === 'EASY'"
+            (click)="changeDifficulty('EASY')"
+          >
+            Easy
+            <span>{{ getDifficultyCount('EASY') }} questions</span>
+          </button>
+
+          <button
+            [class.selected]="selectedDifficulty === 'MEDIUM'"
+            (click)="changeDifficulty('MEDIUM')"
+          >
+            Medium
+            <span>{{ getDifficultyCount('MEDIUM') }} questions</span>
+          </button>
+
+          <button
+            [class.selected]="selectedDifficulty === 'HARD'"
+            (click)="changeDifficulty('HARD')"
+          >
+            Hard
+            <span>{{ getDifficultyCount('HARD') }} questions</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Number of Questions</h3>
+
+        <div class="manual-count">
+          <input
+            type="number"
+            min="1"
+            [max]="getMaxQuestions()"
+            [(ngModel)]="selectedQuestionCount"
+            (ngModelChange)="adjustQuestionCount()"
+          >
+
+          <span>
+            Choose between 1 and {{ getMaxQuestions() }}
+          </span>
+        </div>
+      </div>
+
+      <button
+        class="start-btn"
+        (click)="startQuiz()"
+        [disabled]="getDifficultyCount(selectedDifficulty) === 0"
+      >
+        Start Quiz
+      </button>
+
+    </div>
+
+    <div class="card quiz-card" *ngIf="quizStarted && !finished && question">
 
       <div class="top-bar">
-        <span>Score: {{ score }}</span>
+        <span>Score: {{ score }} / {{ questions.length }}</span>
         <span>{{ currentQuestionIndex + 1 }} / {{ questions.length }}</span>
+      </div>
+
+      <div class="question-meta">
+        <span>{{ question.domain }}</span>
+        <span>{{ question.difficulty }}</span>
       </div>
 
       <h1>{{ question.questionText }}</h1>
@@ -41,13 +122,34 @@
 
     </div>
 
-    <div class="card" *ngIf="finished">
+    <div class="card result-card" *ngIf="finished">
 
-      <h1>Finished 🎉</h1>
-      <h2>{{ score }} / {{ questions.length }}</h2>
-      <h3>{{ (score / questions.length * 100) | number:'1.0-0' }}%</h3>
+      <h1>Quiz Finished 🎉</h1>
 
-      <button class="next" (click)="resetQuiz()">Restart</button>
+      <div class="result-score">
+        {{ score }} / {{ questions.length }}
+      </div>
+
+      <div class="percentage">
+        {{ getFinalPercentage() }}%
+      </div>
+
+      <p *ngIf="getFinalPercentage() >= 80">
+        Great job. You are getting interview-ready.
+      </p>
+
+      <p *ngIf="getFinalPercentage() >= 50 && getFinalPercentage() < 80">
+        Good progress. Keep practicing and review the difficult topics.
+      </p>
+
+      <p *ngIf="getFinalPercentage() < 50">
+        You need more practice. Start again and focus on the basics.
+      </p>
+
+      <div class="result-actions">
+        <button class="next" (click)="restartSameSettings()">Try Again</button>
+        <button class="secondary" (click)="resetQuiz()">Change Settings</button>
+      </div>
 
     </div>
 
